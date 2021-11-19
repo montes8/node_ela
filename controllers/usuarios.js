@@ -7,6 +7,7 @@ const Usuario = require('../models/usuario');
 
 
 const usuariosGet = async(req = request, res = response) => {
+    try {
 
     const { limite = 5, desde = 0 } = req.query;
     const query = { estado: true };
@@ -22,7 +23,13 @@ const usuariosGet = async(req = request, res = response) => {
         total,
         usuarios
     });
-}
+
+    } catch (error) {
+         console.log(error);
+          throw new Error('el metodo get');
+     }
+
+    }
 
 const usuariosPost = async(req, res = response) => {
     
