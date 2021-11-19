@@ -7,7 +7,6 @@ const Usuario = require('../models/usuario');
 
 
 const usuariosGet = async(req = request, res = response) => {
-    try {
 
     const { limite = 5, desde = 0 } = req.query;
     const query = { estado: true };
@@ -17,19 +16,13 @@ const usuariosGet = async(req = request, res = response) => {
         Usuario.find(query)
             .skip( Number( desde ) )
             .limit(Number( limite ))
-    ]);
+    ]).catch(error => { throw error});
 
     res.json({
         total,
         usuarios
     });
-
-    } catch (error) {
-         console.log(error);
-          throw new Error('el metodo get');
-     }
-
-    }
+}
 
 const usuariosPost = async(req, res = response) => {
     
@@ -41,7 +34,7 @@ const usuariosPost = async(req, res = response) => {
     usuario.password = bcryptjs.hashSync( password, salt );
 
     // Guardar en BD
-    await usuario.save();
+    await usuario.save().catch(error => { throw error});
 
     res.json({
         usuario
@@ -59,7 +52,7 @@ const usuariosPut = async(req, res = response) => {
         resto.password = bcryptjs.hashSync( password, salt );
     }
 
-    const usuario = await Usuario.findByIdAndUpdate( id, resto );
+    const usuario = await Usuario.findByIdAndUpdate( id, resto ).catch(error => { throw error});;
 
     res.json(usuario);
 }
@@ -77,7 +70,7 @@ const usuariosDelete = async(req, res = response) => {
     // Fisicamente lo borramos
     // const usuario = await Usuario.findByIdAndDelete( id );
 
-    const usuario = await Usuario.findByIdAndUpdate( id, { estado: false } );
+    const usuario = await Usuario.findByIdAndUpdate( id, { estado: false } ).catch(error => { throw error});;
 
 
     res.json(usuario);
