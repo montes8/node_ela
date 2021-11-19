@@ -15,7 +15,7 @@ const { usuariosGet,
 const router = Router();
 
 
-router.get('/', usuariosGet );
+router.get('/listar/', usuariosGet );
 
 router.put('/:id',[
     check('id', 'No es un ID válido').isMongoId(),

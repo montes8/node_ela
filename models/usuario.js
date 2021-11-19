@@ -28,7 +28,7 @@ const UsuarioSchema = Schema({
         default: true
     }
 });
-
+    
 
 
 UsuarioSchema.methods.toJSON = function() {
