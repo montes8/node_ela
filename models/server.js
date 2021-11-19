@@ -21,7 +21,7 @@ class Server {
     }
 
     async conectarDB() {
-        await dbConnection().catch(error => { throw error});;
+        await dbConnection().catch(error => { throw error});
     }
 
 

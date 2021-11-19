@@ -11,7 +11,7 @@ const dbConnection = async() => {
             useUnifiedTopology: true,
             useCreateIndex: true,
             useFindAndModify: false
-        }).catch(error => { throw error});;
+        }).catch(error => { throw error});
     
         console.log('Base de datos online');
 
