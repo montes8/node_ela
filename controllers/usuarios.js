@@ -8,20 +8,25 @@ const Usuario = require('../models/usuario');
 
 const usuariosGet = async(req = request, res = response) => {
 
+    try {
     const { limite = 5, desde = 0 } = req.query;
     const query = { estado: true };
 
     const [ total, usuarios ] = await Promise.all([
-        Usuario.countDocuments(query).catch(error => { throw error}),
+        Usuario.countDocuments(query),
         Usuario.find(query)
             .skip( Number( desde ) )
-            .limit(Number( limite )).catch(error => { throw error})
+            .limit(Number( limite ))
     ]).catch(error => { throw error});
 
     res.json({
         total,
         usuarios
     });
+
+} catch (error) {
+    console.log('error: ' + error);
+  }
 }
 
 const usuariosPost = async(req, res = response) => {
