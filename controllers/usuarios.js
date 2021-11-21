@@ -8,12 +8,12 @@ const Usuario = require('../models/usuario');
 
 const usuariosGet = async(req = request, res = response) => {
 
-    var ip = require("ip");
+   /* var ip = require("ip");
     var ipaddress = ip.address()
 
-    console.log( ip.address() );
+    console.log( ip.address() );*/
 
-    /*const { limite = 5, desde = 0 } = req.query;
+    const { limite = 5, desde = 0 } = req.query;
     const query = { estado: true };
 
     const [ total, usuarios ] = await Promise.all([
@@ -21,12 +21,11 @@ const usuariosGet = async(req = request, res = response) => {
         Usuario.find(query)
             .skip( Number( desde ) )
             .limit(Number( limite ))
-    ]).catch(error => { throw error});*/
+    ]).catch(error => { throw error});
 
     res.json({
-       // total,
-       // usuarios,
-       ipaddress
+        total,
+        usuarios
     });
 }
 
