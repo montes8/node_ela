@@ -16,14 +16,19 @@ const login = async(req, res = response) => {
         const usuario = await Usuario.findOne({ correo });
         if ( !usuario ) {
             return res.status(400).json({
-                msg: 'Usuario / Password no son correctos - correo'
+                  'errorCode': 15,
+                  'title': 'Password no son correctos - correo',
+                  'description': 'uno de los campos ingresados son incorrectos, corrogelos e intentalo de nuevo'
             });
         }
 
         // SI el usuario está activo
         if ( !usuario.estado ) {
             return res.status(400).json({
-                msg: 'Usuario / Password no son correctos - estado: false'
+                'errorCode': 16,
+                'title': 'Usuario / Password no son correctos - estado: false',
+                'description': 'uno de los campos ingresados son incorrectos, corrogelos e intentalo de nuevo'
+            
             });
         }
 
@@ -31,7 +36,9 @@ const login = async(req, res = response) => {
         const validPassword = bcryptjs.compareSync( password, usuario.password );
         if ( !validPassword ) {
             return res.status(400).json({
-                msg: 'Usuario / Password no son correctos - password'
+                'errorCode': 17,
+                'title': 'Usuario / Password no son correctos - password',
+                'description': 'uno de los campos ingresados son incorrectos, corrogelos e intentalo de nuevo'
             });
         }
 
@@ -46,7 +53,10 @@ const login = async(req, res = response) => {
     } catch (error) {
         console.log(error)
         res.status(500).json({
-            msg: 'Hable con el administrador'
+            'errorCode': 17,
+            'title': 'Hable con el administrador',
+            'description': 'uno de los campos ingresados son incorrectos, corrogelos e intentalo de nuevo'
+    
         });
     }   
 
