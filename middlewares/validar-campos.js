@@ -8,7 +8,7 @@ const validarCampos = ( req, res, next ) => {
         return res.status(400).json({
             'errorCode': 17,
             'title': 'Campos Enviados incorectos',
-            'description': `${errors.json}`
+            'description': `${JSON.stringify(errors)}`
     } );
     }
 

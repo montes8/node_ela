@@ -4,6 +4,43 @@ const bcryptjs = require('bcryptjs');
 
 const Usuario = require('../models/usuario');
 
+const errorBody = {
+    'success': false,
+    'error': {
+      'errorCode': 15,
+      'errorMessage': 'ocurrio un error inesperado',
+      'errorMessageDetail': 'ocurrio un error inesperado'
+    }
+  }
+
+const listGlossaryBody = {
+    "message": {
+      "titulo": "Operación Exitosa",
+      "codigo": 10100,
+      "descripcion": "Operación Exitosa"
+    },
+    "payload": {
+      "titulo": "Portafolio",
+      "subtitulo": "Conoce el detalle de tu portafolio",
+      "portafolios": [
+        {
+          "titulo": "Moderado",
+          "cantidad": "Invertido: 100%",
+          "tasa": "TAZA DEL 9% ",
+          "disclaimer": "Rda.imac no arriega tu inversion para poder matener una rentabilidad modera",
+          "icono": "false"
+        },
+        {
+            "titulo": "Moderado",
+            "cantidad": "Invertido: 100%",
+            "tasa": "TAZA DEL 9% ",
+            "disclaimer": "Rda.imac no arriega tu inversion para poder matener una rentabilidad modera",
+            "icono": "false"
+          }
+      ]
+    }
+  }
+
 
 
 const usuariosGet = async(req = request, res = response) => {
@@ -28,6 +65,17 @@ const usuariosGet = async(req = request, res = response) => {
         usuarios
     });
 }
+
+const usuariosGlossary = async(req = request, res = response) => {
+
+    try{
+        res.json(listGlossaryBody);
+      }catch(error){
+        res.status(500).json(errorBody)
+      }
+  
+    
+ }
 
 const usuariosPost = async(req, res = response) => {
     
@@ -68,7 +116,7 @@ const usuariosPatch = (req, res = response) => {
     });
 }
 
-const usuariosDelete = async(req, res = response) => {
+const usuariosDeleteInactive = async(req, res = response) => {
 
     const { id } = req.params;
 
@@ -76,6 +124,18 @@ const usuariosDelete = async(req, res = response) => {
     // const usuario = await Usuario.findByIdAndDelete( id );
 
     const usuario = await Usuario.findByIdAndUpdate( id, { estado: false } ).catch(error => { throw error});
+
+
+    res.json(usuario);
+}
+
+const usuariosDelete = async(req, res = response) => {
+
+    const { id } = req.params;
+
+    // Fisicamente lo borramos
+
+    const usuario = await Usuario.findByIdAndDelete( id).catch(error => { throw error});
 
 
     res.json(usuario);
@@ -89,5 +149,7 @@ module.exports = {
     usuariosPost,
     usuariosPut,
     usuariosPatch,
+    usuariosDeleteInactive,
     usuariosDelete,
+    usuariosGlossary
 }
