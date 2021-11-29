@@ -24,7 +24,7 @@ router.get('/', obtenerProductos );
 router.get('/:id',[
     check('id', 'No es un id de Mongo válido').isMongoId(),
     check('id').custom( existeProductoPorId ),
-    validarCampos,
+    validarCampos
 ], obtenerProducto );
 
 // Crear categoria - privado - cualquier persona con un token válido
@@ -50,7 +50,7 @@ router.delete('/:id',[
     esAdminRole,
     check('id', 'No es un id de Mongo válido').isMongoId(),
     check('id').custom( existeProductoPorId ),
-    validarCampos,
+    validarCampos
 ], borrarProducto);
 
 
