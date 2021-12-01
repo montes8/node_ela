@@ -49,8 +49,8 @@ const listPortafolioBody = {
         {
           "key": "Saldo de cuenta base",
           "valor": "US$ 870.80",
-          "icono": "balanceaccount ",
-          "separador": true
+          "icono": "balanceaccount",
+          "separador": false
         },
         {
           "key": "Saldo de cuenta ahorro",
@@ -73,7 +73,7 @@ const listPortafolioBody = {
         {
           "key": "Prima base",
           "valor": "US$ 3,283.90",
-          "icono": "balanceaccount ",
+          "icono": "",
           "separador": false
         },
         {
@@ -85,7 +85,7 @@ const listPortafolioBody = {
         {
           "key": "Tiempo transcurrido",
           "valor": "3 meses",
-          "icono": "balanceaccount ",
+          "icono": "",
           "separador": false
         }
       ]

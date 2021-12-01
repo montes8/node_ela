@@ -21,7 +21,7 @@ const router = Router();
 router.get('/', usuariosGet );
 
 router.get('/portafolio', usuariosPortafolio );
-router.get('/inversion', usuariosInversion );
+router.post('/inversion', usuariosInversion );
 
 router.put('/:id',[
     validarJWT,
