@@ -13,7 +13,7 @@ const errorBody = {
     }
   }
 
-const listGlossaryBody = {
+const listPortafolioBody = {
     "message": {
       "titulo": "Operación Exitosa",
       "codigo": 10100,
@@ -27,21 +27,70 @@ const listGlossaryBody = {
           "titulo": "Moderado",
           "cantidad": "Invertido: 100%",
           "tasa": "TAZA DEL 9% ",
-          "disclaimer": "Rda.imac no arriega tu inversion para poder matener una rentabilidad modera",
-          "icono": "false"
-        },
-        {
-            "titulo": "Moderado",
-            "cantidad": "Invertido: 100%",
-            "tasa": "TAZA DEL 9% ",
-            "disclaimer": "Rda.imac no arriega tu inversion para poder matener una rentabilidad modera",
-            "icono": "false"
-          }
+          "disclaimer": "Rimac no arriesga tu inversion para mantener una renta moderada",
+          "icono": "false",
+          "esHtml": false
+        }
       ]
     }
   }
 
 
+  const listInversionBody ={
+    "message": {
+      "titulo": "Operación Exitosa",
+      "codigo": 10100,
+      "descripcion": "Operación Exitosa"
+    },
+    "payload": {
+      "titulo": "Inversión",
+      "subtitulo": "Conoce el detalle de tu inversión",
+      "parametros": [
+        {
+          "key": "Saldo de cuenta base",
+          "valor": "US$ 870.80",
+          "icono": "balanceaccount ",
+          "separador": true
+        },
+        {
+          "key": "Saldo de cuenta ahorro",
+          "valor": "US$ 198,450.46",
+          "icono": "pinkaccount",
+          "separador": true
+        },
+        {
+          "key": "Valor de rescate",
+          "valor": "US$ 188,527.94",
+          "icono": "",
+          "separador": false
+        },
+        {
+          "key": "Prima invertida",
+          "valor": "US$ 200,00",
+          "icono": "",
+          "separador": false
+        },
+        {
+          "key": "Prima base",
+          "valor": "US$ 3,283.90",
+          "icono": "balanceaccount ",
+          "separador": false
+        },
+        {
+          "key": "Prima ahorro",
+          "valor": "US$ 196,716.10",
+          "icono": "",
+          "separador": false
+        },
+        {
+          "key": "Tiempo transcurrido",
+          "valor": "3 meses",
+          "icono": "balanceaccount ",
+          "separador": false
+        }
+      ]
+    }
+  }
 
 const usuariosGet = async(req = request, res = response) => {
 
@@ -66,15 +115,24 @@ const usuariosGet = async(req = request, res = response) => {
     });
 }
 
-const usuariosGlossary = async(req = request, res = response) => {
+const usuariosInversion = async(req = request, res = response) => {
+
+  try{
+      res.json(listInversionBody);
+    }catch(error){
+      res.status(500).json(errorBody)
+    }
+
+}
+
+const usuariosPortafolio = async(req = request, res = response) => {
 
     try{
-        res.json(listGlossaryBody);
+        res.json(listPortafolioBody);
       }catch(error){
         res.status(500).json(errorBody)
       }
-  
-    
+
  }
 
 const usuariosPost = async(req, res = response) => {
@@ -151,5 +209,6 @@ module.exports = {
     usuariosPatch,
     usuariosDeleteInactive,
     usuariosDelete,
-    usuariosGlossary
+    usuariosPortafolio,
+    usuariosInversion
 }

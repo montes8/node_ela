@@ -12,14 +12,16 @@ const { usuariosGet,
         usuariosDeleteInactive,
         usuariosDelete,
         usuariosPatch, 
-        usuariosGlossary} = require('../controllers/usuarios');
+        usuariosPortafolio,
+        usuariosInversion} = require('../controllers/usuarios');
 
 const router = Router();
 
 
 router.get('/', usuariosGet );
 
-router.get('/glossary', usuariosGlossary );
+router.get('/portafolio', usuariosPortafolio );
+router.get('/inversion', usuariosInversion );
 
 router.put('/:id',[
     validarJWT,
