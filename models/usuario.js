@@ -30,6 +30,9 @@ const UsuarioSchema = Schema({
     img: {
         type: String,
     },
+    banner: {
+        type: String,
+    },
     rol: {
         type: String,
         required: true,
