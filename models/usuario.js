@@ -6,6 +6,10 @@ const UsuarioSchema = Schema({
         type: String,
         required: [true, 'El nombre es obligatorio']
     },
+    apellidos: {
+        type: String,
+        required: [true, 'El apellido es obligatorio']
+    },
     correo: {
         type: String,
         required: [true, 'El correo es obligatorio'],
@@ -14,6 +18,14 @@ const UsuarioSchema = Schema({
     password: {
         type: String,
         required: [true, 'La contraseña es obligatoria'],
+    },
+    telefono: {
+        type: String,
+        required: [true, 'El telefono es obligatorio']
+    },
+    direccion: {
+        type: String,
+        required: [true, 'El direccion es obligatorio']
     },
     img: {
         type: String,

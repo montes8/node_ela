@@ -26,7 +26,7 @@ const listPortafolioBody = {
         {
           "titulo": "Moderado",
           "cantidad": "Invertido: 100%",
-          "tasa": "TAZA DEL 9% ",
+          "tasa": "",
           "disclaimer": "Rimac no arriesga tu inversion para mantener una renta moderada",
           "icono": "false",
           "esHtml": false
@@ -137,8 +137,8 @@ const usuariosPortafolio = async(req = request, res = response) => {
 
 const usuariosPost = async(req, res = response) => {
     
-    const { nombre, correo, password, rol } = req.body;
-    const usuario = new Usuario({ nombre, correo, password, rol });
+    const { nombre,apellidos, correo, password,telefono,direccion,img, rol } = req.body;
+    const usuario = new Usuario({ nombre,apellidos, correo,password,telefono,direccion, img, rol });
 
     // Encriptar la contraseña
     const salt = bcryptjs.genSaltSync();
