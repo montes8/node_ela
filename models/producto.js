@@ -32,6 +32,7 @@ const ProductoSchema = Schema({
     descripcion: { type: String },
     subdescripcion: { type: String },
     img: { type: String },
+    banner: { type: String },
     disponible: { type: Boolean, defult: true },
     favorito: { type: Boolean, defult: false }
 });

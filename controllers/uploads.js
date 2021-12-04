@@ -1,9 +1,6 @@
 const path = require('path');
 const fs   = require('fs');
 
-const cloudinary = require('cloudinary').v2
-cloudinary.config( process.env.CLOUDINARY_URL );
-
 const { response } = require('express');
 const { subirArchivo } = require('../helpers/subir-archivo');
 
@@ -82,14 +79,14 @@ const actualizarImagen = async(req, res = response ) => {
 }
 
 
-const actualizarImagenCloudinary = async(req, res = response ) => {
+const actualizarImagenBanner = async(req, res = response ) => {
 
     const { id, coleccion } = req.params;
 
     let modelo;
 
     switch ( coleccion ) {
-        case 'usuarios':
+        case 'usuariosbanner':
             modelo = await Usuario.findById(id);
             if ( !modelo ) {
                 return res.status(400).json({
@@ -99,7 +96,7 @@ const actualizarImagenCloudinary = async(req, res = response ) => {
         
         break;
 
-        case 'productos':
+        case 'productosbanner':
             modelo = await Producto.findById(id);
             if ( !modelo ) {
                 return res.status(400).json({
@@ -115,17 +112,17 @@ const actualizarImagenCloudinary = async(req, res = response ) => {
 
 
     // Limpiar imágenes previas
-    if ( modelo.img ) {
-        const nombreArr = modelo.img.split('/');
-        const nombre    = nombreArr[ nombreArr.length - 1 ];
-        const [ public_id ] = nombre.split('.');
-        cloudinary.uploader.destroy( public_id );
+    if ( modelo.banner ) {
+        // Hay que borrar la imagen del servidor
+        const pathImagen = path.join( __dirname, '../uploads', coleccion, modelo.banner );
+        if ( fs.existsSync( pathImagen ) ) {
+            fs.unlinkSync( pathImagen );
+        }
     }
 
 
-    const { tempFilePath } = req.files.archivo
-    const { secure_url } = await cloudinary.uploader.upload( tempFilePath );
-    modelo.img = secure_url;
+    const nombre = await subirArchivo( req.files, undefined, coleccion );
+    modelo.banner = nombre;
 
     await modelo.save();
 
@@ -133,6 +130,7 @@ const actualizarImagenCloudinary = async(req, res = response ) => {
     res.json( modelo );
 
 }
+
 
 const mostrarImagen = async(req, res = response ) => {
 
@@ -186,5 +184,5 @@ module.exports = {
     cargarArchivo,
     actualizarImagen,
     mostrarImagen,
-    actualizarImagenCloudinary
+    actualizarImagenBanner
 }
