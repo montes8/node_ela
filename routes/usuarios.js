@@ -48,7 +48,7 @@ router.delete('/:id',[
     validarCampos
 ],usuariosDeleteInactive );
 
-router.delete('/delete:id',[
+router.delete('/delete/:id',[
     validarJWT,
     check('id', 'No es un ID válido').isMongoId(),
     check('id').custom( existeUsuarioPorId ),

@@ -6,6 +6,7 @@ const { subirArchivo } = require('../helpers/subir-archivo');
 
 
 const Usuario = require('../models/usuario');
+const Categoria = require('../models/categoria');
 const  Producto = require('../models/producto');
 
 
@@ -45,6 +46,15 @@ const actualizarImagen = async(req, res = response ) => {
 
         case 'productos':
             modelo = await Producto.findById(id);
+            if ( !modelo ) {
+                return res.status(400).json({
+                    msg: `No existe un producto con el id ${ id }`
+                });
+            }
+        
+        break;
+        case 'categorias':
+            modelo = await Categoria.findById(id);
             if ( !modelo ) {
                 return res.status(400).json({
                     msg: `No existe un producto con el id ${ id }`
@@ -158,6 +168,16 @@ const mostrarImagen = async(req, res = response ) => {
             }
         
         break;
+
+        case 'categorias':
+            modelo = await Categoria.findById(id);
+            if ( !modelo ) {
+                return res.status(400).json({
+                    msg: `No existe un producto con el id ${ id }`
+                });
+            }
+        
+        break;
     
         default:
             return res.status(500).json({ msg: 'Se me olvidó validar esto'});
@@ -178,11 +198,58 @@ const mostrarImagen = async(req, res = response ) => {
 }
 
 
+const mostrarImagenBanner = async(req, res = response ) => {
+
+    const { id, coleccion } = req.params;
+
+    let modelo;
+
+    switch ( coleccion ) {
+        case 'usuariosbanner':
+            modelo = await Usuario.findById(id);
+            if ( !modelo ) {
+                return res.status(400).json({
+                    msg: `No existe un usuario con el id ${ id }`
+                });
+            }
+        
+        break;
+
+        case 'productosbanner':
+            modelo = await Producto.findById(id);
+            if ( !modelo ) {
+                return res.status(400).json({
+                    msg: `No existe un producto con el id ${ id }`
+                });
+            }
+        
+        break;
+    
+        default:
+            return res.status(500).json({ msg: 'Se me olvidó validar esto'});
+    }
+
+
+    // Limpiar imágenes previas
+    if ( modelo.img ) {
+        // Hay que borrar la imagen del servidor
+        const pathImagen = path.join( __dirname, '../uploads', coleccion, modelo.banner );
+        if ( fs.existsSync( pathImagen ) ) {
+            return res.sendFile( pathImagen )
+        }
+    }
+
+    const pathImagen = path.join( __dirname, '../assets/no-image.jpg');
+    res.sendFile( pathImagen );
+}
+
+
 
 
 module.exports = {
     cargarArchivo,
     actualizarImagen,
     mostrarImagen,
+    mostrarImagenBanner,
     actualizarImagenBanner
 }
