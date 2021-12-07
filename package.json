@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app"
+    "start": "pm2 start app.js",
+    "list": "pm2 list",
+    "stop": "pm2 stop app.js"
   },
   "keywords": [],
   "author": "",
@@ -21,9 +23,8 @@
     "ip": "^1.1.5",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.13",
-    "nodemon": "^2.0.15",
     "notenv": "^2.0.3",
-    "npm2": "^2.0.0",
+    "pm2": "^5.1.2",
     "uuid": "^8.3.2"
   }
 }

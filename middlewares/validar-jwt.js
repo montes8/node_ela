@@ -41,7 +41,7 @@ const validarJWT = async( req = request, res = response, next ) => {
         }
         
         
-        //req.usuario = usuario;
+        req.usuario = usuario;
         next();
 
     } catch (error) {
