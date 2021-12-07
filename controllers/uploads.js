@@ -231,7 +231,7 @@ const mostrarImagenBanner = async(req, res = response ) => {
 
 
     // Limpiar imágenes previas
-    if ( modelo.img ) {
+    if ( modelo.banner ) {
         // Hay que borrar la imagen del servidor
         const pathImagen = path.join( __dirname, '../uploads', coleccion, modelo.banner );
         if ( fs.existsSync( pathImagen ) ) {

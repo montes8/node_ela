@@ -18,13 +18,13 @@ const validarJWT = async( req = request, res = response, next ) => {
 
     try {
         
-        const { uid } = jwt.verify( token, process.env.SECRETORPRIVATEKEY );
+        const { uid } = jwt.verify( token, process.env.SECRETORPRIVATEKEY);
 
         // leer el usuario que corresponde al uid
         const usuario = await Usuario.findById( uid );
 
         if( !usuario ) {
-            return res.status(401).json({
+            return res.status(407).json({
                 'errorCode': 17,
                 'title': 'Token no válido - usuario no existe DB',
                 'description': 'El usuario no existe en la base de datos' 
@@ -41,13 +41,13 @@ const validarJWT = async( req = request, res = response, next ) => {
         }
         
         
-        req.usuario = usuario;
+        //req.usuario = usuario;
         next();
 
     } catch (error) {
 
         console.log(error);
-        res.status(401).json({
+        res.status(407).json({
             'errorCode': 17,
             'title': 'Token no válido',
             'description':`El usuarios ha sido temporalmente desactivado y/o bloqueado ${error.json}` 

@@ -187,6 +187,19 @@ const usuariosDeleteInactive = async(req, res = response) => {
     res.json(usuario);
 }
 
+const usuariosActive = async(req, res = response) => {
+
+  const { id } = req.params;
+
+  // Fisicamente lo borramos
+  // const usuario = await Usuario.findByIdAndDelete( id );
+
+  const usuario = await Usuario.findByIdAndUpdate( id, { estado: true } ).catch(error => { throw error});
+
+
+  res.json(usuario);
+}
+
 const usuariosDelete = async(req, res = response) => {
 
     const { id } = req.params;
@@ -210,5 +223,6 @@ module.exports = {
     usuariosDeleteInactive,
     usuariosDelete,
     usuariosPortafolio,
-    usuariosInversion
+    usuariosInversion,
+    usuariosActive
 }

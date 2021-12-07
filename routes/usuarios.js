@@ -13,7 +13,8 @@ const { usuariosGet,
         usuariosDelete,
         usuariosPatch, 
         usuariosPortafolio,
-        usuariosInversion} = require('../controllers/usuarios');
+        usuariosInversion,
+        usuariosActive} = require('../controllers/usuarios');
 
 const router = Router();
 
@@ -27,7 +28,7 @@ router.put('/:id',[
     validarJWT,
     check('id', 'No es un ID válido').isMongoId(),
     check('id').custom( existeUsuarioPorId ),
-    check('rol').custom( esRoleValido ), 
+   // check('rol').custom( esRoleValido ), 
     validarCampos
 ],usuariosPut );
 
@@ -54,6 +55,13 @@ router.delete('/delete/:id',[
     check('id').custom( existeUsuarioPorId ),
     validarCampos
 ],usuariosDelete);
+
+router.post('/delete/:id',[
+    validarJWT,
+    check('id', 'No es un ID válido').isMongoId(),
+    check('id').custom( existeUsuarioPorId ),
+    validarCampos
+],usuariosActive);
 
 router.patch('/', usuariosPatch );
 
