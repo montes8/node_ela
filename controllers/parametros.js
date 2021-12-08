@@ -17,30 +17,38 @@ const errorBody = {
     {
       "id": "SRt0KAMCI4Q",
       "idVideo": "SRt0KAMCI4Q",
-      "title": "Sueltate el pelo",
-      "duration": 0,
-      "durationTotal": 0
+      "autor": "Tiny",
+      "descripcion": "Sueltate el pelo",
+      "nombreVideo": "Sueltate el pelo",
+      "duracion": 0,
+      "duracionTotal": 0
     },
     {
       "id":  "mmRBXjVENDQ",
       "idVideo": "mmRBXjVENDQ",
-      "title": " Mienteme ",
-      "duration": 0,
-      "durationTotal": 0
+      "autor": "Tiny",
+      "descripcion": "Sueltate el pelo",
+      "nombreVideo": " Mienteme ",
+      "duracion": 0,
+      "duracionTotal": 0
     },
     {
       "id":  "0f3ZHuC-l0c",
       "idVideo": "0f3ZHuC-l0c",
-      "title": "Nuestro amor",
-      "duration": 0,
-      "durationTotal": 0
+      "autor": "Tiny",
+      "descripcion": "Sueltate el pelo",
+      "nombreVideo": "Nuestro amor",
+      "duracion": 0,
+      "duracionTotal": 0
     },
     {
       "id":  "95IaQ8vyqHg",
       "idVideo":  "95IaQ8vyqHg",
-      "title": "Te quiero mas",
-      "duration": 0,
-      "durationTotal": 0
+      "autor": "Tiny",
+      "descripcion": "Sueltate el pelo",
+      "nombreVideo": "Te quiero mas",
+      "duracion": 0,
+      "duracionTotal": 0
     }
   ]
 
@@ -105,7 +113,9 @@ const paramGet = async(req = request, res = response) => {
 
   
 
-   const param = await Param.findOne().catch(error => { throw error});
+   const param = await Param.findOne().catch(error => { 
+    res.status(500).json(errorBody)
+     throw error});
 
    if(param){
     res.json(param);
@@ -116,7 +126,9 @@ const paramGet = async(req = request, res = response) => {
 }
 const bannerGet = async(req = request, res = response) => {
 
-  const banner = await Banner.find().catch(error => { throw error});
+  const banner = await Banner.find().catch(error => { 
+    res.status(500).json(errorBody)
+    throw error});
 
   res.json(banner);
 
@@ -125,7 +137,9 @@ const bannerGet = async(req = request, res = response) => {
 const videoGet = async(req = request, res = response) => {
 
  
-  const video = await Video.find().catch(error => { throw error});
+  const video = await Video.find().catch(error => {
+    res.status(500).json(errorBody)
+     throw error});
 
   res.json(video);
 
@@ -138,7 +152,9 @@ const bannerPost = async(req, res = response) => {
   const banner = new Banner({ titulo,img,idcategoria });
 
   // Guardar en BD
-  await banner.save().catch(error => { throw error});
+  await banner.save().catch(error => { 
+    res.status(500).json(errorBody)
+    throw error});
 
   res.json(
     banner);
@@ -146,11 +162,15 @@ const bannerPost = async(req, res = response) => {
 
 const videoPost = async(req, res = response) => {
     
-  const { titulo,idvideo,descripcion} = req.body;
-  const video = new Video({ titulo,idvideo,descripcion});
+  const { autor,idVideo,nombreVideo,descripcion} = req.body;
+  const video = new Video({ autor,idVideo,nombreVideo,descripcion});
 
   // Guardar en BD
-  await video.save().catch(error => { throw error});
+  await video.save().catch(error => { 
+    res.status(500).json(errorBody)
+    throw error
+  
+  });
 
   res.json(
     video
@@ -163,7 +183,9 @@ const paramPost = async(req, res = response) => {
   const param = new Param({ titulo,descripcion, registro});
 
   // Guardar en BD
-  await param.save().catch(error => { throw error});
+  await param.save().catch(error => { 
+    res.status(500).json(errorBody)
+    throw error});
 
   res.json(
     param
@@ -175,7 +197,9 @@ const bannerPut = async(req, res = response) => {
   const { id } = req.params;
   const { _id, ...resto } = req.body;
 
-  const banner = await Banner.findByIdAndUpdate( id, resto ).catch(error => { throw error});
+  const banner = await Banner.findByIdAndUpdate( id, resto ).catch(error => { 
+    res.status(500).json(errorBody)
+    throw error});
 
   res.json(banner);
 }
@@ -185,7 +209,9 @@ const videoPut = async(req, res = response) => {
   const { id } = req.params;
   const { _id, ...resto } = req.body;
 
-  const video = await Video.findByIdAndUpdate( id, resto ).catch(error => { throw error});
+  const video = await Video.findByIdAndUpdate( id, resto ).catch(error => { 
+    res.status(500).json(errorBody)
+    throw error});
 
   res.json(video);
 }
@@ -193,7 +219,9 @@ const videoPut = async(req, res = response) => {
 const paramPut = async(req, res = response) => {
   const { id } = req.params;
   const { _id, ...resto } = req.body;
-  const param = await Param.findByIdAndUpdate( id, resto ).catch(error => { throw error});
+  const param = await Param.findByIdAndUpdate( id, resto ).catch(error => { 
+    res.status(500).json(errorBody)
+    throw error});
 
   res.json(param);
 }
@@ -213,7 +241,9 @@ const bannerDelete = async(req, res = response) => {
 const videoDelete = async(req, res = response) => {
   const { id } = req.params;
   // Fisicamente lo borramos
-  const video = await Video.findByIdAndDelete( id).catch(error => { throw error});
+  const video = await Video.findByIdAndDelete( id).catch(error => { 
+    res.status(500).json(errorBody)
+    throw error});
 
   res.json(video);
 }

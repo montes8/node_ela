@@ -1,17 +1,22 @@
 const { Schema, model } = require('mongoose');
 
 const VideoSchema = Schema({
-    titulo: {
+    autor: {
         type: String,
         required: [true, 'El nombre es obligatorio']
     },
-    idvideo: {
+    idVideo: {
         type: String,
         required: [true, 'El idvideo es obligatorio']
     },
-    idvdescripcionideo: {
+    nombreVideo: {
         type: String,
-        required: [true, 'La descipcion es obligatorio']
+        required: [true, 'El nombre es obligatorio']
+    },
+
+    descripcion: {
+        type: String,
+        required: [true, 'La descr esopcion obligatorio']
     }
 });
     

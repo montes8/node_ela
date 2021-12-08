@@ -35,8 +35,9 @@ router.post('/banner',[
 ], bannerPost );
 
 router.post('/video',[
-    check('titulo', 'El nombre es obligatorio').not().isEmpty(),
-    check('idvideo', 'El id de video es obligatorio').not().isEmpty(),
+    check('autor', 'El nombre es obligatorio').not().isEmpty(),
+    check('nombreVideo', 'El nombre es obligatorio').not().isEmpty(),
+    check('idVideo', 'El id de video es obligatorio').not().isEmpty(),
     check('descripcion', 'El id de video es obligatorio').not().isEmpty(),
     validarCampos
 ], videoPost );

@@ -7,7 +7,7 @@ const validarCampos = ( req, res, next ) => {
     if( !errors.isEmpty() ){
         return res.status(400).json({
             'errorCode': 17,
-            'title': 'Campos Enviados incorectos',
+            'title': 'Campos Enviados incorrectos',
             'description': `${JSON.stringify(errors)}`
     } );
     }
