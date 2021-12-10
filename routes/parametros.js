@@ -31,6 +31,9 @@ router.get('/param', paramGet );
 
 router.post('/banner',[
     check('titulo', 'El nombre es obligatorio').not().isEmpty(),
+    check('descripcion', 'descripcion  es obligatorio').not().isEmpty(),
+    check('idProducto', 'idProducto  es obligatorio').not().isEmpty(),
+    check('categoria', 'idCategoria  es obligatorio').not().isEmpty(),
     validarCampos
 ], bannerPost );
 

@@ -8,6 +8,7 @@ const { subirArchivo } = require('../helpers/subir-archivo');
 const Usuario = require('../models/usuario');
 const Categoria = require('../models/categoria');
 const  Producto = require('../models/producto');
+const  Banner = require('../models/banner');
 
 
 const cargarArchivo = async(req, res = response) => {
@@ -55,6 +56,15 @@ const actualizarImagen = async(req, res = response ) => {
         break;
         case 'categorias':
             modelo = await Categoria.findById(id);
+            if ( !modelo ) {
+                return res.status(400).json({
+                    msg: `No existe un producto con el id ${ id }`
+                });
+            }
+        
+        break;
+        case 'banner':
+            modelo = await Banner.findById(id);
             if ( !modelo ) {
                 return res.status(400).json({
                     msg: `No existe un producto con el id ${ id }`

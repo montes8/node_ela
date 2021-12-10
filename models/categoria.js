@@ -6,21 +6,28 @@ const CategoriaSchema = Schema({
         required: [true, 'El nombre es obligatorio'],
         unique: true
     },
+    descripcion: {
+        type: String,
+        required: [true, 'El nombre es obligatorio'],
+        unique: true
+    },
     estado: {
         type: Boolean,
-        default: true,
-        required: true
+        default: true
     },
-    usuario: {
-        type: Schema.Types.ObjectId,
-        ref: 'Usuario',
-        required: true
+    recomendado: {
+        type: Boolean,
+        default: true
+    },
+    idUsuario: {
+        type: String,
     }
 });
 
 
 CategoriaSchema.methods.toJSON = function() {
     const { __v, estado, ...data  } = this.toObject();
+    data.uid = _id;
     return data;
 }
 

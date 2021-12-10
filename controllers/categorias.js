@@ -1,24 +1,31 @@
 const { response } = require('express');
-const { Categoria } = require('../models/categoria');
+const Categoria = require('../models/categoria');
+
+const errorBody = {
+    'success': false,
+    'error': {
+      'errorCode': 15,
+      'errorMessage': 'ocurrio un error inesperado',
+      'errorMessageDetail': 'ocurrio un error inesperado'
+    }
+  }
 
 
 const obtenerCategorias = async(req, res = response ) => {
 
-    const { limite = 5, desde = 0 } = req.query;
-    const query = { estado: true };
+    const categorias =  await  Categoria.find()
+                .skip( Number( 10 ) )
+                .limit(Number( 0 )).catch(error => { 
+            res.status(500).json(errorBody)
+            throw error
+        });
 
-    const [ total, categorias ] = await Promise.all([
-        Categoria.countDocuments(query),
-        Categoria.find(query)
-            .populate('usuario', 'nombre')
-            .skip( Number( desde ) )
-            .limit(Number( limite ))
-    ]);
-
-    res.json({
-        total,
-        categorias
-    });
+            if(categorias){
+                res.json(categorias);
+                return
+            }
+         
+            res.json([]);
 }
 
 const obtenerCategoria = async(req, res = response ) => {

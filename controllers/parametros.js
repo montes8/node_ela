@@ -54,34 +54,34 @@ const errorBody = {
 
   const listBanner = [
     {
-      "id":  1,
-      "title": "tini",
-      "icon": "https://www.letras.com.br/storage/artista/7/3/0b99.jpg"
+      "id":  "1",
+      "titulo": "tini",
+      "img": "https://www.letras.com.br/storage/artista/7/3/0b99.jpg"
     },
     {
-      "id":  2,
-      "title": "Maria",
-      "icon": "https://farras.live/wp-content/uploads/2020/12/fba41729-e05d-498c-a578-0deeee1f0e64.jpg"
+      "id":  "i2",
+      "titulo": "Maria",
+      "img": "https://farras.live/wp-content/uploads/2020/12/fba41729-e05d-498c-a578-0deeee1f0e64.jpg"
     },
     {
-      "id":  3,
-      "title": "Laurita",
-      "icon": "https://i.pinimg.com/originals/00/81/69/0081691546611adb6266749bc50dab1d.jpg"
+      "id":  "3",
+      "titulo": "Laurita",
+      "img": "https://i.pinimg.com/originals/00/81/69/0081691546611adb6266749bc50dab1d.jpg"
     },
     {
-      "id":  4,
-      "title": "tini",
-      "icon": "https://www.letras.com.br/storage/artista/7/3/0b99.jpg"
+      "id":  "4",
+      "titulo": "tini",
+      "img": "https://www.letras.com.br/storage/artista/7/3/0b99.jpg"
     },
     {
-      "id":  5,
-      "title": "Maria",
-      "icon": "https://farras.live/wp-content/uploads/2020/12/fba41729-e05d-498c-a578-0deeee1f0e64.jpg"
+      "id":  "6",
+      "titulo": "Maria",
+      "img": "https://farras.live/wp-content/uploads/2020/12/fba41729-e05d-498c-a578-0deeee1f0e64.jpg"
     },
     {
-      "id":  6,
-      "title": "Laurita",
-      "icon": "https://i.pinimg.com/originals/00/81/69/0081691546611adb6266749bc50dab1d.jpg"
+      "id":  "7",
+      "titulo": "Laurita",
+      "img": "https://i.pinimg.com/originals/00/81/69/0081691546611adb6266749bc50dab1d.jpg"
     }
    
   ]
@@ -138,7 +138,7 @@ const videoGet = async(req = request, res = response) => {
 
  
   const video = await Video.find().catch(error => {
-    res.status(500).json(errorBody)
+    res.status(500).json({errorBody})
      throw error});
 
   res.json(video);
@@ -148,8 +148,8 @@ const videoGet = async(req = request, res = response) => {
 
 const bannerPost = async(req, res = response) => {
     
-  const { titulo,img, idcategoria} = req.body;
-  const banner = new Banner({ titulo,img,idcategoria });
+  const { titulo,descripcion,img,categoria,idProducto} = req.body;
+  const banner = new Banner({ titulo,descripcion,img,categoria,idProducto });
 
   // Guardar en BD
   await banner.save().catch(error => { 

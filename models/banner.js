@@ -6,13 +6,19 @@ const BannerSchema = Schema({
         type: String,
         required: [true, 'El nombre es obligatorio']
     },
+    descripcion: {
+        type: String,
+        required: [true, 'La descrpcion es obligatorio']
+    },
     img: {
+        type: String,
+    },
+    categoria: {
         type: String
     },
-    idcategoria: {
+    idProducto: {
         type: String,
-        required: [true, 'La categoria es necesario'],
-        unique: true
+        required: [true, 'El producto es necesario']
     }
 });
     
