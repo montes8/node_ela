@@ -10,12 +10,11 @@ const errorBody = {
     }
   }
 
-
 const obtenerCategorias = async(req, res = response ) => {
 
     const categorias =  await  Categoria.find()
-                .skip( Number( 10 ) )
-                .limit(Number( 0 )).catch(error => { 
+                .skip( Number( 0 ) )
+                .limit(Number( 10 )).catch(error => { 
             res.status(500).json(errorBody)
             throw error
         });
@@ -39,29 +38,13 @@ const obtenerCategoria = async(req, res = response ) => {
 }
 
 const crearCategoria = async(req, res = response ) => {
-
-    const nombre = req.body.nombre.toUpperCase();
-
-    const categoriaDB = await Categoria.findOne({ nombre });
-
-    if ( categoriaDB ) {
-        return res.status(400).json({
-            msg: `La categoria ${ categoriaDB.nombre }, ya existe`
-        });
-    }
-
-    // Generar la data a guardar
-    const data = {
-        nombre,
-        usuario: req.usuario._id
-    }
-
-    const categoria = new Categoria( data );
+    const { nombre,descripcion, estado, recomendado,idUsuario } = req.body;
+    const categoria = new Categoria({ nombre,descripcion, estado,recomendado,idUsuario});
 
     // Guardar DB
-    await categoria.save();
+    await categoria.save().catch(error => { throw error});
 
-    res.status(201).json(categoria);
+    res.json(categoria);
 
 }
 

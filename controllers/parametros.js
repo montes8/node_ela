@@ -4,110 +4,6 @@ const Banner = require('../models/banner');
 const Param = require('../models/param');
 const Video = require('../models/video');
 
-const errorBody = {
-    'success': false,
-    'error': {
-      'errorCode': 15,
-      'errorMessage': 'ocurrio un error inesperado',
-      'errorMessageDetail': 'ocurrio un error inesperado'
-    }
-  }
-
-  const listParameter = [
-    {
-      "id": "SRt0KAMCI4Q",
-      "idVideo": "SRt0KAMCI4Q",
-      "autor": "Tiny",
-      "descripcion": "Sueltate el pelo",
-      "nombreVideo": "Sueltate el pelo",
-      "duracion": 0,
-      "duracionTotal": 0
-    },
-    {
-      "id":  "mmRBXjVENDQ",
-      "idVideo": "mmRBXjVENDQ",
-      "autor": "Tiny",
-      "descripcion": "Sueltate el pelo",
-      "nombreVideo": " Mienteme ",
-      "duracion": 0,
-      "duracionTotal": 0
-    },
-    {
-      "id":  "0f3ZHuC-l0c",
-      "idVideo": "0f3ZHuC-l0c",
-      "autor": "Tiny",
-      "descripcion": "Sueltate el pelo",
-      "nombreVideo": "Nuestro amor",
-      "duracion": 0,
-      "duracionTotal": 0
-    },
-    {
-      "id":  "95IaQ8vyqHg",
-      "idVideo":  "95IaQ8vyqHg",
-      "autor": "Tiny",
-      "descripcion": "Sueltate el pelo",
-      "nombreVideo": "Te quiero mas",
-      "duracion": 0,
-      "duracionTotal": 0
-    }
-  ]
-
-  const listBanner = [
-    {
-      "id":  "1",
-      "titulo": "tini",
-      "img": "https://www.letras.com.br/storage/artista/7/3/0b99.jpg"
-    },
-    {
-      "id":  "i2",
-      "titulo": "Maria",
-      "img": "https://farras.live/wp-content/uploads/2020/12/fba41729-e05d-498c-a578-0deeee1f0e64.jpg"
-    },
-    {
-      "id":  "3",
-      "titulo": "Laurita",
-      "img": "https://i.pinimg.com/originals/00/81/69/0081691546611adb6266749bc50dab1d.jpg"
-    },
-    {
-      "id":  "4",
-      "titulo": "tini",
-      "img": "https://www.letras.com.br/storage/artista/7/3/0b99.jpg"
-    },
-    {
-      "id":  "6",
-      "titulo": "Maria",
-      "img": "https://farras.live/wp-content/uploads/2020/12/fba41729-e05d-498c-a578-0deeee1f0e64.jpg"
-    },
-    {
-      "id":  "7",
-      "titulo": "Laurita",
-      "img": "https://i.pinimg.com/originals/00/81/69/0081691546611adb6266749bc50dab1d.jpg"
-    }
-   
-  ]
-
-
-const usuariosParameter = async(req = request, res = response) => {
-
-  try{
-      res.json(listParameter);
-    }catch(error){
-      res.status(500).json(errorBody)
-    }
-
-  
-}
-
-const usuariosBanner = async(req = request, res = response) => {
-
-  try{
-      res.json(listBanner);
-    }catch(error){
-      res.status(500).json(errorBody)
-    }
-
-
-}
 
 const paramGet = async(req = request, res = response) => {
 
@@ -137,7 +33,7 @@ const bannerGet = async(req = request, res = response) => {
 const videoGet = async(req = request, res = response) => {
 
  
-  const video = await Video.find().catch(error => {
+  const video= await Video.find().catch(error => {
     res.status(500).json({errorBody})
      throw error});
 
@@ -249,8 +145,6 @@ const videoDelete = async(req, res = response) => {
 }
 
 module.exports = {
-    usuariosParameter,
-    usuariosBanner,
     bannerPost,
     bannerPut,
     bannerDelete,

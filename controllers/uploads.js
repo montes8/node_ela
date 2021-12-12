@@ -188,6 +188,16 @@ const mostrarImagen = async(req, res = response ) => {
             }
         
         break;
+
+        case 'banner':
+            modelo = await Banner.findById(id);
+            if ( !modelo ) {
+                return res.status(400).json({
+                    msg: `No existe un producto con el id ${ id }`
+                });
+            }
+        
+        break;
     
         default:
             return res.status(500).json({ msg: 'Se me olvidó validar esto'});

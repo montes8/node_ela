@@ -3,9 +3,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 const { validarJWT, validarCampos} = require('../middlewares');
 
-const { usuariosParameter,
-        usuariosBanner,
-        bannerPost,
+const { bannerPost,
         bannerPut,
         bannerDelete,
         videoPost,
@@ -19,12 +17,7 @@ const { usuariosParameter,
 
 const router = Router();
 
-
-router.get('/parameter', usuariosParameter );
-
-router.get('/banner', usuariosBanner );
-
-router.get('/slider', bannerGet );
+router.get('/banner', bannerGet );
 
 router.get('/video', videoGet );
 router.get('/param', paramGet );

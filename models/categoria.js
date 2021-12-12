@@ -4,12 +4,10 @@ const CategoriaSchema = Schema({
     nombre: {
         type: String,
         required: [true, 'El nombre es obligatorio'],
-        unique: true
     },
     descripcion: {
         type: String,
-        required: [true, 'El nombre es obligatorio'],
-        unique: true
+        required: [true, 'El descripcion es obligatorio'],
     },
     estado: {
         type: Boolean,
@@ -21,12 +19,13 @@ const CategoriaSchema = Schema({
     },
     idUsuario: {
         type: String,
+        default: 'id'
     }
 });
 
 
 CategoriaSchema.methods.toJSON = function() {
-    const { __v, estado, ...data  } = this.toObject();
+    const { __v,_id, ...data  } = this.toObject();
     data.uid = _id;
     return data;
 }
