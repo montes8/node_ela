@@ -13,27 +13,59 @@ const errorBody = {
     }
   }
 
-const listPortafolioBody = {
-    "message": {
-      "titulo": "Operación Exitosa",
-      "codigo": 10100,
-      "descripcion": "Operación Exitosa"
-    },
-    "payload": {
-      "titulo": "Portafolio",
-      "subtitulo": "Conoce el detalle de tu portafolio",
-      "portafolios": [
-        {
-          "titulo": "Moderado",
-          "cantidad": "Invertido: 100%",
-          "tasa": "",
-          "disclaimer": "Rimac no arriesga tu inversion para mantener una renta moderada",
-          "icono": "false",
-          "esHtml": false
-        }
-      ]
-    }
-  }
+const listPortafolioBody = { 
+  "payload": { 
+      "success": true, 
+      "orden": { 
+          "monto": 95, 
+          "cuotas": "1", 
+          "moneda": "USD", 
+          "numeroAutorizacion": "170822-3464", 
+          "numeroReferencia": "101020", 
+          "numeroPedido": "PAG-200000033464" 
+      }, 
+      "resultado": { 
+          "codigo": 2000, 
+          "codigoRespuesta": "VENTA_EXITOSA", 
+          "mensaje": "Venta realizada exitosamente", 
+          "codigoExterno": "000", 
+          "mensajeExterno": "Aprobado y completado con exito", 
+          "referencia": { 
+              "numId": "9548935", 
+              "solicitud": "", 
+              "pago": { 
+                  "numeroDocumento": "47342160", 
+                  "correoAsesor": "correoasesor", 
+                  "tipoDocumento": "2", 
+                  "telefono": "12345678", 
+                  "nombres": "RAPLH VELCI", 
+                  "apellidoPaterno": "MELGRA", 
+                  "apellidoMaterno": "RVEROS", 
+                  "tipoMoneda": "USD", 
+                  "correoCliente": "jacarrillo@indracompany.com", 
+                  "tipoOperacionCobranza": "CVC", 
+                  "nroCuotas": 0, 
+                  "tipoOperacionApi": "PAGO_EN_LINEA", 
+                  "pagoMultiple": [ 
+                      { 
+                          "nroPoliza": "989047", 
+                          "producto": "VE", 
+                          "codigoProducto": "2101", 
+                          "documentoPago": "874991253", 
+                          "monto": 95, 
+                          "nombreProducto": "Seguro vehicular", 
+                          "estadoCuota": "Pendiente" 
+                      } 
+                  ] 
+              } 
+          } 
+      }, 
+      "tarjeta": { 
+          "numeroTarjeta": "485951****0036", 
+          "marca": "VISA" 
+      } 
+  } 
+}
 
 
   const listInversionBody ={
