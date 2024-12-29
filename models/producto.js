@@ -11,32 +11,18 @@ const ProductoSchema = Schema({
         default: true,
         required: true
     },
-    idUsuario: {
-        type: String ,
-        default: 'Usuario',
-        required: true
-    },
     precio: {
-        type: Number,
-        default: 0
-    },
-    puntuacion: {
         type: Number,
         default: 0
     },
     idCategoria: {
         type: String ,
-        default: 'categoria',
+        default: '0',
         required: true
     },
     descripcion: { type: String },
     subDescripcion: { type: String },
-    img: { type: String },
-    banner: { type: String },
-    dias: { type: String, defult: 'Lunes a viernes' },
-    horaInicio :{type: String,defult: '09:00'},
-    horaFin :{type: String,defult: '18:00'},
-    favorito: { type: Boolean, defult: false }
+    img: { type: String }
 });
 
 

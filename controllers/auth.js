@@ -6,6 +6,31 @@ const Usuario = require('../models/usuario');
 const { generarJWT } = require('../helpers/generar-jwt');
 
 
+const loginResponse =  { 
+    "token": "EOBE_uBSGYw", 
+    "name": "NICKI NICOLE"}
+
+    const errorBody = {
+        'success': false,
+        'error': {
+          'errorCode': 15,
+          'errorMessage': 'ocurrio un error inesperado',
+          'errorMessageDetail': 'ocurrio un error inesperado'
+        }
+      }
+
+const loginTest = async(req = request, res = response) => {
+
+    try{
+        res.json(loginResponse);
+    
+      }catch(error){
+        res.status(500).json(errorBody)
+      }
+  
+  }
+
+
 const login = async(req, res = response) => {
 
     const { correo, password } = req.body;
@@ -65,5 +90,6 @@ const login = async(req, res = response) => {
 
 
 module.exports = {
-    login
+    login,
+    loginTest
 }

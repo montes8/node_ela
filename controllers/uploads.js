@@ -6,13 +6,10 @@ const { subirArchivo } = require('../helpers/subir-archivo');
 
 
 const Usuario = require('../models/usuario');
-const Categoria = require('../models/categoria');
 const  Producto = require('../models/producto');
-const  Banner = require('../models/banner');
 
 
 const cargarArchivo = async(req, res = response) => {
-
 
     try {
         
@@ -35,7 +32,7 @@ const actualizarImagen = async(req, res = response ) => {
     let modelo;
 
     switch ( coleccion ) {
-        case 'usuarios':
+        case 'valu':
             modelo = await Usuario.findById(id);
             if ( !modelo ) {
                 return res.status(400).json({
@@ -45,7 +42,7 @@ const actualizarImagen = async(req, res = response ) => {
         
         break;
 
-        case 'productos':
+        case 'product':
             modelo = await Producto.findById(id);
             if ( !modelo ) {
                 return res.status(400).json({
@@ -54,27 +51,9 @@ const actualizarImagen = async(req, res = response ) => {
             }
         
         break;
-        case 'categorias':
-            modelo = await Categoria.findById(id);
-            if ( !modelo ) {
-                return res.status(400).json({
-                    msg: `No existe un producto con el id ${ id }`
-                });
-            }
         
-        break;
-        case 'banner':
-            modelo = await Banner.findById(id);
-            if ( !modelo ) {
-                return res.status(400).json({
-                    msg: `No existe un producto con el id ${ id }`
-                });
-            }
-        
-        break;
-    
         default:
-            return res.status(500).json({ msg: 'Se me olvidó validar esto'});
+            return res.status(500).json({ msg: 'Datos no encontrados'});
     }
 
 
@@ -84,65 +63,16 @@ const actualizarImagen = async(req, res = response ) => {
         const pathImagen = path.join( __dirname, '../uploads', coleccion, modelo.img );
         if ( fs.existsSync( pathImagen ) ) {
             fs.unlinkSync( pathImagen );
+        }else{
+            return res.status(400).json({
+                msg: 'Imagen no encontrada'
+            });
         }
     }
 
 
     const nombre = await subirArchivo( req.files, undefined, coleccion );
     modelo.img = nombre;
-
-    await modelo.save();
-
-
-    res.json( modelo );
-
-}
-
-
-const actualizarImagenBanner = async(req, res = response ) => {
-
-    const { id, coleccion } = req.params;
-
-    let modelo;
-
-    switch ( coleccion ) {
-        case 'usuariosbanner':
-            modelo = await Usuario.findById(id);
-            if ( !modelo ) {
-                return res.status(400).json({
-                    msg: `No existe un usuario con el id ${ id }`
-                });
-            }
-        
-        break;
-
-        case 'productosbanner':
-            modelo = await Producto.findById(id);
-            if ( !modelo ) {
-                return res.status(400).json({
-                    msg: `No existe un producto con el id ${ id }`
-                });
-            }
-        
-        break;
-    
-        default:
-            return res.status(500).json({ msg: 'Se me olvidó validar esto'});
-    }
-
-
-    // Limpiar imágenes previas
-    if ( modelo.banner ) {
-        // Hay que borrar la imagen del servidor
-        const pathImagen = path.join( __dirname, '../uploads', coleccion, modelo.banner );
-        if ( fs.existsSync( pathImagen ) ) {
-            fs.unlinkSync( pathImagen );
-        }
-    }
-
-
-    const nombre = await subirArchivo( req.files, undefined, coleccion );
-    modelo.banner = nombre;
 
     await modelo.save();
 
@@ -159,7 +89,7 @@ const mostrarImagen = async(req, res = response ) => {
     let modelo;
 
     switch ( coleccion ) {
-        case 'usuarios':
+        case 'valu':
             modelo = await Usuario.findById(id);
             if ( !modelo ) {
                 return res.status(400).json({
@@ -169,7 +99,7 @@ const mostrarImagen = async(req, res = response ) => {
         
         break;
 
-        case 'productos':
+        case 'product':
             modelo = await Producto.findById(id);
             if ( !modelo ) {
                 return res.status(400).json({
@@ -177,30 +107,9 @@ const mostrarImagen = async(req, res = response ) => {
                 });
             }
         
-        break;
-
-        case 'categorias':
-            modelo = await Categoria.findById(id);
-            if ( !modelo ) {
-                return res.status(400).json({
-                    msg: `No existe un producto con el id ${ id }`
-                });
-            }
-        
-        break;
-
-        case 'banner':
-            modelo = await Banner.findById(id);
-            if ( !modelo ) {
-                return res.status(400).json({
-                    msg: `No existe un producto con el id ${ id }`
-                });
-            }
-        
-        break;
-    
+        break;    
         default:
-            return res.status(500).json({ msg: 'Se me olvidó validar esto'});
+            return res.status(500).json({ msg: 'Datos no encontrados'});
     }
 
 
@@ -210,60 +119,16 @@ const mostrarImagen = async(req, res = response ) => {
         const pathImagen = path.join( __dirname, '../uploads', coleccion, modelo.img );
         if ( fs.existsSync( pathImagen ) ) {
             return res.sendFile( pathImagen )
+        }else{
+            return res.status(400).json({
+                msg: 'Imagen no encontrada'
+            });
         }
     }
 
     const pathImagen = path.join( __dirname, '../assets/no-image.jpg');
     res.sendFile( pathImagen );
 }
-
-
-const mostrarImagenBanner = async(req, res = response ) => {
-
-    const { id, coleccion } = req.params;
-
-    let modelo;
-
-    switch ( coleccion ) {
-        case 'usuariosbanner':
-            modelo = await Usuario.findById(id);
-            if ( !modelo ) {
-                return res.status(400).json({
-                    msg: `No existe un usuario con el id ${ id }`
-                });
-            }
-        
-        break;
-
-        case 'productosbanner':
-            modelo = await Producto.findById(id);
-            if ( !modelo ) {
-                return res.status(400).json({
-                    msg: `No existe un producto con el id ${ id }`
-                });
-            }
-        
-        break;
-    
-        default:
-            return res.status(500).json({ msg: 'Se me olvidó validar esto'});
-    }
-
-
-    // Limpiar imágenes previas
-    if ( modelo.banner ) {
-        // Hay que borrar la imagen del servidor
-        const pathImagen = path.join( __dirname, '../uploads', coleccion, modelo.banner );
-        if ( fs.existsSync( pathImagen ) ) {
-            return res.sendFile( pathImagen )
-        }
-    }
-
-    const pathImagen = path.join( __dirname, '../assets/no-image.jpg');
-    res.sendFile( pathImagen );
-}
-
-
 
 
 module.exports = {
