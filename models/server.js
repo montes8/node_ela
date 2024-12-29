@@ -11,8 +11,6 @@ class Server {
         this.port = 8080;
         this.paths = {
             auth:       '/service/auth',
-            buscar:     '/service/search',
-            categorias: '/service/category',
             productos:  '/service/product',
             usuarios:   '/service/user',
             parametros:   '/service/config',
