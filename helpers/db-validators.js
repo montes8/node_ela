@@ -1,13 +1,5 @@
-const Role = require('../models/role');
+
 const Usuario = require('../models/usuario');
-
-const esRoleValido = async(rol = '') => {
-
-    const existeRol = await Role.findOne({ rol }).catch(error => { throw error});
-    if ( !existeRol ) {
-        throw new Error(`El rol ${ rol } no está registrado en la BD`);
-    }
-}
 
 const emailExiste = async( correo = '' ) => {
 
@@ -67,7 +59,6 @@ const coleccionesPermitidas = ( coleccion = '', colecciones = []) => {
 
 
 module.exports = {
-    esRoleValido,
     emailExiste,
     existeUsuarioPorId,
     existeCategoriaPorId,

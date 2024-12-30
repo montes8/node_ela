@@ -22,6 +22,7 @@
     "fs": "0.0.1-security",
     "ip": "^1.1.5",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^6.12.0",
     "mongoose": "^5.13.13",
     "notenv": "^2.0.3",
     "pm2": "^5.1.2",

@@ -6,7 +6,7 @@ const dbConnection = async() => {
 
     try {
 
-        await mongoose.connect( process.env.MONGODB_CNN, {
+        await mongoose.connect( "mongodb://localhost:27017/valuShopping", {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true,

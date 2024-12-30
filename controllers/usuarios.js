@@ -180,8 +180,8 @@ const loadRecipes = async(req = request, res = response) => {
 
 const usuariosPost = async(req, res = response) => {
     
-    const { nombre,apellidos, correo, password,telefono,direccion,img,banner, rol } = req.body;
-    const usuario = new Usuario({ nombre,apellidos, correo,password,telefono,direccion, img,banner, rol });
+    const { nombre,apellidos, correo, password,telefono,direccion,img} = req.body;
+    const usuario = new Usuario({ nombre,apellidos, correo,password,telefono,direccion, img});
   
 
     // Encriptar la contraseña

@@ -134,7 +134,5 @@ const mostrarImagen = async(req, res = response ) => {
 module.exports = {
     cargarArchivo,
     actualizarImagen,
-    mostrarImagen,
-    mostrarImagenBanner,
-    actualizarImagenBanner
+    mostrarImagen
 }

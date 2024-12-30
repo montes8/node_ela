@@ -19,8 +19,8 @@ const paramGet = async(req = request, res = response) => {
 
 const paramPost = async(req, res = response) => {
     
-  const { titulo,descripcion, registro} = req.body;
-  const param = new Param({ titulo,descripcion, registro});
+  const { titulo,descripcion, enableCategory} = req.body;
+  const param = new Param({ titulo,descripcion, enableCategory});
 
   // Guardar en BD
   await param.save().catch(error => { 

@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
 
-//const { dbConnection } = require('../database/config');
+const { dbConnection } = require('../database/config');
 
 class Server {
 
@@ -18,7 +18,7 @@ class Server {
         }
 
         // Conectar a base de datos
-        //this.conectarDB();
+        this.conectarDB();
 
         // Middlewares
         this.middlewares();
@@ -29,7 +29,7 @@ class Server {
     
     }
 
-    //async conectarDB() {  await dbConnection().catch(error => { throw error}); }
+    async conectarDB() {  await dbConnection().catch(error => { throw error}); }
 
 
     middlewares() {
